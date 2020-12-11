@@ -266,7 +266,7 @@ function Shopper(){
     useEffect(()=>{
         const controller = new AbortController();
 
-        fetch('http://localhost:5000/pls')
+        fetch('https://sultansback.herokuapp.com/pls')
         .then(res => res.json())
         .then(data =>  {
             let temparr = [];
