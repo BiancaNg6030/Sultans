@@ -7,6 +7,8 @@ app.use(cors())
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 5000;
 const axios = require('axios');
+const buildPath = path.join(__dirname, '..', 'build');
+app.use(express.static(buildPath));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(express.static(path.join(__dirname, 'sultans')));
