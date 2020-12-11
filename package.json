@@ -22,10 +22,9 @@
     "start-client": "react-scripts start",
     "build": "react-scripts build && (cd backend && yarn install)",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start": "(cd backend && npm run start) & npm run start"
+    "eject": "react-scripts eject",    
+  "start": "cd server && yarn start"
   },
-  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",
