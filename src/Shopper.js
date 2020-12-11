@@ -1,14 +1,13 @@
 
 import React, {useEffect, useState} from "react";
 import Grid from '@material-ui/core/Grid';
-import { GridList, GridListTile, ButtonGroup, Button, ListItem ,List, ListItemText, Card, CardContent, Typography, CardMedia} from '@material-ui/core';
-import { Divider, Fab, Select, MenuItem, FormControl, FormHelperText} from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import { Paper } from "@material-ui/core";
+import { GridList, GridListTile,  Button, Card, CardContent, Typography, CardMedia} from '@material-ui/core';
+import { Fab} from '@material-ui/core';
+
 import { makeStyles } from '@material-ui/core/styles';
 import parse from 'html-react-parser';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import ContactSupportIcon from '@material-ui/icons/ContactSupport';
+
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -20,27 +19,18 @@ const useStyles = makeStyles({
         color:'white',
         fontSize:'large',
         backgroundColor:'#287b5c',
-        //fontWeight:400,
-       //justifyContent: "space-evenly",
         borderRadius:'30px',
         boxShadow: '0px 0px 5px grey',
         width:'40px',
         height:'45px',
-        //marginBottom:'-10vh',
         textShadow:'0px 0px 1px grey',
         border:'3px solid #287b5c',
         display: 'block',
-        //marginLeft: '10vw',
-        //marginRight: '-3',
-        //marginBottom:'auto',
-        //marginTop:'10px',
          position:'absolute',
          bottom:'20px',
          left:'50%',
-         //left:'100px',
         justifyContent: "space-between",
         "&:hover": {
-            //you want this to be the same as the backgroundColor above
             backgroundColor: "white",
             color:'#287b5c',
             border:'3px solid #287b5c'
@@ -59,7 +49,6 @@ const useStyles = makeStyles({
         alignItems:'center',
         padding:'1px',
         fontFamily: "Open sans",
-        //justifyItems:'bottom',
         flexDirection: 'column',
         width:'200px',
         marginTop:'-5vh',
@@ -92,7 +81,6 @@ const useStyles = makeStyles({
        borderRadius:'5px',
        border:'3px solid #287b5c',
        "&:hover": {
-        //you want this to be the same as the backgroundColor above
         backgroundColor: "white",
         color:'#287b5c',
         border:'3px solid #287b5c',
@@ -119,15 +107,7 @@ const useStyles = makeStyles({
         width:'200px',
         textShadow:'0px 0px 1px grey' , 
         fontSize:'9pt',
-       // justifyContent:'flex-start',
-       // marginBottom:'-5px',
-       // height:'10%',
         lineHeight:'1.1',
-        // position:'absolute',
-        // bottom:'15%',
-        // right:'15%',
-        // left:'15%',
-        // overflow:'hidden',
         height:'20%',
         maxWidth:'150px',
         display:'block',
@@ -176,7 +156,6 @@ const useStyles = makeStyles({
         fontFamily: "Montserrat",
         color:'#287b5c',
         fontWeight:300,
-        //textDecoration:"underline",
         lineHeight:'1.1',
         marginBottom:'3vh',
         marginLeft:'5vh',
@@ -184,18 +163,16 @@ const useStyles = makeStyles({
         textShadow:'0px 0px 1px grey' , 
         width:'150px',
           },
-          sortmemo:{
-            //fontFamily: "Helvetica Neue",
-            color:'#275400',
-            fontWeight:300,
-            //textDecoration:"underline",
-            lineHeight:'1.1',
-            marginBottom:'3vh',
-            marginLeft:'10vh',
-            marginTop:'5vh',
-            textShadow:'0px 0px 1px grey' , 
-            width:'300px',
-              },
+    sortmemo:{
+    color:'#275400',
+    fontWeight:300,
+    lineHeight:'1.1',
+    marginBottom:'3vh',
+    marginLeft:'10vh',
+    marginTop:'5vh',
+    textShadow:'0px 0px 1px grey' , 
+    width:'300px',
+        },
     sortitem:{
         useNextVariants: true,
         fontFamily:'Open sans',
@@ -207,7 +184,6 @@ const useStyles = makeStyles({
         marginTop:'-1vh',
         textAlign:'left',
         "&:hover": {
-            //you want this to be the same as the backgroundColor above
             fontWeight:700,
             backgroundColor:'transparent',
         },
@@ -228,12 +204,7 @@ const useStyles = makeStyles({
         fontWeight:300,
         fontSize:'16pt',
         textAlign:'right',
-      //  marginTop:'-10px',
         lineHeight:'1.1',
-        // marginBottom:'5px',
-        // marginRight:'-10vw',
-       // textDecoration:'underline',
-       // height:'20%',
         maxWidth:'230px',
         display:'block',
         marginLeft:'auto',
@@ -249,20 +220,15 @@ const useStyles = makeStyles({
         textAlign:'right',
         lineHeight:'1.1',
         position:'reletive',
-        //bottom:'10%',
         right:'5%',
-
-       // maxWidth:'220px',
-        display:'block',
-       // marginLeft:'auto',    
+        display:'block', 
       },
   });
 
 function Shopper(){
     const classes = useStyles();
     const [data, setData] = useState(null);
-    const [chkList, setChkList] = useState(null);
-    const [dispList, setDispList] = useState(null);
+
     useEffect(()=>{
         const controller = new AbortController();
 
@@ -270,25 +236,18 @@ function Shopper(){
         .then(res => res.json())
         .then(data =>  {
             let temparr = [];
-            let tempList=[];
             for(var i in data.products){
                 let temprow = {
                     id:data.products[i].id,
                     titile: data.products[i].title,
                     body: data.products[i].body_html,
                     image: data.products[i].image.src,
-                    //im_width: data.products[i].image.width
-                }
-                let temprow1 = {
-                    id:data.products[i].id,
-                    count:0,
-                    //im_width: data.products[i].image.width
+                  
                 }
                 temparr.push(temprow)
-                tempList.push(temprow1)
+
             }
             setData(temparr)
-            setChkList(tempList)
         })
         
 
@@ -297,25 +256,6 @@ function Shopper(){
         };
     },[])
 
-    function added(item){
-
-            let tempListo = [];
-            for(var i in chkList){
-                if(chkList[i].id === item){
-                 let int = chkList[i].count + 1;
-                 tempListo.push({ id:chkList[i].id,
-                    count:int})
-                    console.log('nosrsly',int)
-                }else{
-                    tempListo.push(chkList[i])
-                }
-
-            };
-            console.log(chkList);
-            setChkList(tempListo);
-            console.log(chkList);
-
-    };
 
     return(
    
@@ -327,9 +267,7 @@ function Shopper(){
                 style={{
                     padding:10,
                     height:'80px', 
-                    backgroundColor:'#fafcff',
-
-                }}>         
+                    backgroundColor:'#fafcff',}}>         
                         <img 
                         alt="logo" 
                         style={{height:'60px'}} 
@@ -342,10 +280,7 @@ function Shopper(){
                     height:'80px', 
                     backgroundColor:'#fafcff',
                     textAlign:'right'
-
-                }}>         
-                       
-                        
+                }}>                                 
                 </Grid>
                 <Grid item  xs={3}
                 style={{
@@ -354,46 +289,25 @@ function Shopper(){
                     backgroundColor:'#fafcff',
                     color:'#316500',
                     textAlign:'right'
-
-
                 }}>         
-                     <h4 style={{fontWeight:300, fontFamily:'Open sans', marginTop:'15px', marginRight:'10px',}}>   Enter Info {'>'} <strong>Pick Meals</strong> {'>'} Checkout</h4> 
-                        
+                    <h4 
+                    style={{
+                        fontWeight:300, 
+                        fontFamily:'Open sans', 
+                        marginTop:'15px', 
+                        marginRight:'10px',}}>   
+                        Enter Info {'>'} <strong>Pick Meals</strong> {'>'} Checkout</h4> 
                 </Grid>
-                
-
-
-                <Grid 
+               <Grid 
                 className={classes.toolbar} 
                 xs={12}>
-{/* 
-                    <ButtonGroup  variant="text">
-                        <Button className={classes.catagories}>
-                            Traditional
-                        </Button>
-                        <Button className={classes.catagories}>
-                        Paleo 
-                        </Button>
-                        <Button className={classes.catagories}>
-                        Keto
-                        </Button>
-                        <Button className={classes.catagories}>
-                            Vegan
-                        </Button>
-                        <Button className={classes.catagories}>
-                            Extras
-                        </Button>
-                    </ButtonGroup> */}
-            
                 </Grid> 
 
                 <Grid  item xs={12} 
                 style={{height:'85vh',backgroundColor:'#f5f9ff'}} 
                 cols={2}>  
-                    <Grid container spacing={24}>
-                       
+                    <Grid container spacing={24}> 
                         <Grid item xs={2}>
-                       
                             <h4 className={classes.sort}>
                                 &nbsp; &nbsp;
                             </h4>
@@ -432,33 +346,31 @@ function Shopper(){
                             }} 
                             cellHeight={210} 
                             spacing={5}>
-
                                 <Grid item xs={12} style={{display:'block', 
-                                
                                 textAlign:'center', 
-                             
                                }}>
-                                   
-                                 
                                     <h1 className={classes.prodhead}>
                                         Traditional Meals
                                     </h1>
                                     <p className={classes.headdesc}>
                                     Well balanced classics with lean proteins, complex carbs, and veggies. 
                                     </p> <p> &nbsp; </p>     
-                                    <Button style={{display:'block', marginBottom:'10vh',marginLeft:'15px',
-                                textAlign:'right', borderBottom:'2px solid #78b991', color:'#78b991', borderRadius:'2px',}}
-                                                >
+                                    <Button 
+                                    style={{
+                                        display:'block', 
+                                        marginBottom:'10vh',
+                                        marginLeft:'15px',
+                                        textAlign:'right', 
+                                        borderBottom:'2px solid #78b991', 
+                                        color:'#78b991', 
+                                        borderRadius:'2px',}}>
                                                 Sort <ArrowDropDownIcon style={{marginBottom:'-7px'}}/>
-                                            </Button>
-                                            <p> &nbsp; </p> 
+                                    </Button>
+                                    <p> &nbsp; </p> 
                                     <h1> &nbsp; </h1>
-                                    
                                 </Grid>
-
                                 {data&&  
                                     data.map((i)=>( 
-
                                         <GridListTile  style={{
                                             display: 'block',
                                             marginLeft: 'auto',
@@ -466,7 +378,6 @@ function Shopper(){
                                             <Card className={classes.prodcard}>
                                                 <CardMedia 
                                                 style={{position:'absolute'}}>
-
                                                     <img src={i.image} alt="ohNoesNONOS" 
                                                     style={{
                                                         borderRadius:'3px',
@@ -476,7 +387,6 @@ function Shopper(){
                                                         height:'205px', 
                                                         width:'205px'}}/> 
                                                 </CardMedia>
-
                                                 <CardContent>
                                                 <Typography 
                                                 align="center" 
@@ -505,15 +415,12 @@ function Shopper(){
 
                                                    $10.00
                                                 </Typography>
-                                                <Button onClick={()=>added(i.id)} 
+                                                <Button 
                                                 className={classes.addButton}>
                                                 <AddRoundedIcon />
                                             </Button>
-                                               
                                                 </CardContent>
-                                                
                                             </Card>
-                                            
                                         </GridListTile>
                                     ))
                                 }
@@ -527,26 +434,31 @@ function Shopper(){
                                         Low in complex carbs, with lean proteins, veggies, nuts and seeds. 
                                         Two is kinda enough to see the scroll and effect of different backgrounds
                                     </p>
-                                    
-                                    <Button style={{display:'block', marginTop:'-4vh',marginLeft:'15px',
-                                textAlign:'right', borderBottom:'2px solid #78b991', color:'#78b991', borderRadius:'2px',}}
-                                                >
-                                                Sort <ArrowDropDownIcon style={{marginBottom:'-7px'}}/>
-                                            </Button>
-                                            <p>&nbsp;</p>
-                                            <p>&nbsp;</p>
+                                    <Button 
+                                    style={{
+                                        display:'block', 
+                                        marginTop:'-4vh',
+                                        marginLeft:'15px',
+                                        textAlign:'right', 
+                                        borderBottom:'2px solid #78b991', 
+                                        color:'#78b991', 
+                                        borderRadius:'2px',}}
+                                    >
+                                        Sort <ArrowDropDownIcon style={{marginBottom:'-7px'}}/>
+                                    </Button>
+                                    <p>&nbsp;</p>
+                                    <p>&nbsp;</p>
                                     <h1> &nbsp; </h1>
                                 </Grid>
-
                                 {data&&  
                                     data.map((i)=>( 
-
                                         <GridListTile >
                                             <Card className={classes.prodcard}>
                                                 <CardMedia 
                                                  style={{position:'absolute'}}>
-
-                                                 <img src={i.image} alt="ohNoesNONOS" 
+                                                 <img 
+                                                 src={i.image} 
+                                                 alt="ohNoesNONOS" 
                                                  style={{
                                                      display: 'block',
                                                      marginLeft:0,
@@ -555,14 +467,13 @@ function Shopper(){
                                                         width:'205px',
                                                         borderRadius:'3px',}}/> 
                                                 </CardMedia>
-
                                                 <CardContent>
                                                 <Typography 
                                                 align="right" 
                                                 variant="h6" 
                                                 component="h6" 
-                                                className={classes.typography}>
-
+                                                className={classes.typography}
+                                                >
                                                     {i.titile}
                                                 </Typography>       
                                                 <p></p>
@@ -570,8 +481,8 @@ function Shopper(){
                                                 variant="caption"
                                                 component="p" 
                                                 color='textSecondary' 
-                                                className={classes.h6}>
-
+                                                className={classes.h6}
+                                                >
                                                     {parse(i.body)}
                                                 </Typography>
                                                 <p></p>
@@ -584,36 +495,50 @@ function Shopper(){
                                                    $10.00
                                                 </Typography>
                                                 </CardContent>
-                                                <Button className={classes.addButton}
-                                                >
+                                                <Button className={classes.addButton}>
                                                 <AddShoppingCartIcon />
                                             </Button>
                                             </Card>
-                                            
                                         </GridListTile>
                                     ))
                                 }
                             </GridList>
                             </Grid>
-
-                        <Grid  item xs={2} 
+                        <Grid  
+                        item xs={2} 
                         padding={4}
                         style={{
                             marginLeft:'-10px',
                             padding: '20px',
                             height:'85vh',
                             backgroundColor:'#f5f9ff'}}>
-                
-                
-                            
-                       
-                            
-  <p><Fab color="inherit" style={{ marginLeft:'2vw', marginTop:'-2vh',}}>
-    <ShoppingCartIcon style={{color:'#275100',}}/>
-  </Fab></p>
-  <Fab variant={'extended'} style={{position:'absolute',right:'10vw',bottom:'5px',color:'#275100'}}><LiveHelpIcon fontsize={'large'} style={{color:'#275100',}}/> </Fab>
-  <Fab size={'large'} variant={'extended'} style={{position:'absolute',right:'5vw',bottom:'5px',color:'#275100'}}><AccountBoxIcon style={{color:'#275100',}}/> </Fab>
-
+                          
+                            <p>
+                                <Fab color="inherit" style={{ marginLeft:'2vw', marginTop:'-2vh',}}>
+                                    <ShoppingCartIcon style={{color:'#275100',}}/>
+                                </Fab>
+                            </p>
+                            <Fab 
+                            variant={'extended'} 
+                            style={{
+                                position:'absolute',
+                                right:'10vw',
+                                bottom:'5px',
+                                color:'#275100'
+                                }}>
+                                    <LiveHelpIcon fontsize={'large'} style={{color:'#275100',}}/> 
+                            </Fab>
+                            <Fab 
+                            size={'large'} 
+                            variant={'extended'} 
+                            style={{
+                                position:'absolute',
+                                right:'5vw',
+                                bottom:'5px',
+                                color:'#275100'
+                                }}>
+                                    <AccountBoxIcon style={{color:'#275100',}}/> 
+                            </Fab>
                         </Grid>
                     </Grid>
                 </Grid> 
